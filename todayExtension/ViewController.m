@@ -9,6 +9,7 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
 
@@ -17,6 +18,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+
+
+- (IBAction)setButtonPressed:(id)sender {
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.today.entitlements"];
+    
+    [sharedDefaults setInteger:[self.textField.text integerValue] forKey:@"MyNumberKey"];
+    [sharedDefaults synchronize];   // (!!) This is crucial.
 }
 
 - (void)didReceiveMemoryWarning {
